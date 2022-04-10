@@ -18,17 +18,6 @@ class prng(object):
         given a, b, m, n, and x0 (i.e., seed). 
         """
         ### your code here
-        #return([(2531011), (505908858), (3539360597), (159719620), (2727824503)])
-
-        # def fib2():
-        #     # Initialize first two Fibonacci Numbers
-        #     limit = 5
-        #     a, b = 0, 1
-        #
-        #     # One by one yield next Fibonacci Number
-        #     while a < limit:
-        #         yield a
-        #         a, b = b, a + b
 
         def lcg2():
             # Initialize first two Fibonacci Numbers
@@ -56,6 +45,21 @@ class prng(object):
         given a, b, c, n, and x0 (i.e., seed). 
         """
         ### your code here
+
+        def xor2():
+            i = 0
+            xn = x0
+
+            # One by one yield next Fibonacci Number
+            while i <= n:
+                yield xn
+                xn = xn ^ ((xn << a) & 0xFFFFFFFF)
+                xn = xn ^ ((xn >> b) & 0xFFFFFFFF)
+                xn = xn ^ ((xn << c) & 0xFFFFFFFF)
+                i = i+1
+
+        return(xor2)
+
         pass
 
     @staticmethod    
@@ -65,6 +69,23 @@ class prng(object):
         given the seed x0 which defaults to 1.
         """
         ### your code here
+
+        #random.randint(start, stop)
+
+        ## A attempt at Mersenne Twister, using Python's Rand fuction
+        def merTwist2():
+            i = 0
+            #xn = x0
+            random.seed(x0)
+
+            # One by one yield next Fibonacci Number
+            while i <= n:
+                xn = random.randint(start, stop)
+                yield xn
+                i = i+1
+
+        return(merTwist2)
+
         pass
 
     @staticmethod
