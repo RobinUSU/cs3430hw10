@@ -126,11 +126,55 @@ class prng(object):
     @staticmethod
     def gen_xorshift_data(a, b, c, n, seed=1, option=1):
         ### your code here
+        xorGen = prng.xorshift(a, b, c, n, x0=seed)()
+
+        ### option 1) generate n lcg numbers.
+        if option == 1:
+            return np.array([next(xorGen) for _ in range(n)])
+
+        ### option 2) generate n lcg numbers by
+        ### varying the seed from i upto n-1.
+        elif option == 2:
+            data = np.zeros(n)
+            for i in range(n):
+                data[i] = next(prng.xorshift(a, b, c, 1, x0=i)())
+            return data
+
+        ### option 3) generate n numbers with numpy arange.
+        elif option == 3:
+            return np.arange(n)
+
+        else:
+            raise Exception('prng.get_xorshift_data(): option must be 1,2,3')
+
         pass
 
     @staticmethod
     def gen_mersenne_twister_data(n, seed=1, start=0, stop=1000, option=1):
         ### your code here
+        #def mersenne_twister(n, x0=1, start=0, stop=1000):
+        merTwistGen = prng.mersenne_twister(n, seed, start, stop)()
+
+        ### option 1) generate n lcg numbers.
+        if option == 1:
+            return np.array([next(merTwistGen) for _ in range(n)])
+
+        ### option 2) generate n lcg numbers by
+        ### varying the seed from i upto n-1.
+        elif option == 2:
+            data = np.zeros(n)
+            for i in range(n):
+                #data[i] = next(prng.xorshift(a, b, c, 1, x0=i)())
+                data[i] = next(prng.mersenne_twister(n,i,start, stop)())
+            return data
+
+        ### option 3) generate n numbers with numpy arange.
+        elif option == 3:
+            return np.arange(n)
+
+        else:
+            raise Exception('prng.get_mersenne_twister_data(): option must be 1,2,3')
+
         pass
 
     @staticmethod
@@ -159,4 +203,30 @@ class prng(object):
     @staticmethod
     def equidistrib_test(seq, n, lower_bound, upper_bound):
         ### your code here
+        fobs = seq
+        fexp = seq
+
+        count1 = (upper_bound - lower_bound + 1)
+        print("n is: " + str(n) + " Range is: " + str(count1))
+
+        # fobs = np.zeros(count1)
+        # fexp = np.zeros(count1)
+        fobs = [0 for i in range(0, count1)]
+        fexp = [0 for i in range(0, count1)]
+
+        print("seq: " + str(seq))
+        print("fobs: " + str(fobs))
+
+        for i in range(count1):
+            print(" DB: " + str(i) + ", Count: " + str(seq.count(i)))
+            fobs[i] = seq.count(i)
+            fexp[i] = n / count1
+
+
+        print("fobs: " + str(fobs))
+        print("fexp: " + str(fexp))
+
+        # v, p = scipy.stats.chisquare(fobs, fexp)
+        v, p = scipy.stats.chisquare(fobs, fexp)
+        return(v, p)
         pass
