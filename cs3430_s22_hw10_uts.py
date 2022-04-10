@@ -32,11 +32,12 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
         norm = max_d - min_d
         return np.array([int(b_a*((d - min_d)/norm) + a) for d in data])
 
-    '''
+
     def test_hw10_prob01_ut01(self):
         print('\n***** CS3430: S22: HW10: Problem 01: Unit Test 01 ************')
         a, b, m, n, seed = 214013, 2531011, 4294967296, 5, 0
         lcgg = prng.lcg(a, b, m, n, x0=seed)()
+        #lcgg = prng.lcg(a, b, m, n, x0=seed)
         rns = [next(lcgg) for _ in range(n)]
         print('LCG random numbers: {}'.format(rns))
         assert len(rns) == n
@@ -44,6 +45,7 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
             print('all random numbers are unique')
         print('CS 3430: S22: HW10: Problem 01: Unit Test 01: pass...')
 
+    '''
     def test_hw10_prob01_ut02(self):
         print('\n***** CS3430: S22: HW10: Problem 01: Unit Test 02 ************')
         a, b, m, n, seed = 214013, 2531011, 4294967296, 10, 1
@@ -405,15 +407,15 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
     ### ================ Problem 3: Unit Tests =====================
 
 
-    def test_hw10_prob03_ut01(self):
-        print('\n***** CS3430: S22: HW10: Problem 03: Unit Test 01 ************')
-        seq = [1, 5, 7, 8, 5, 1, 3, 4, 3, 3, 2, 2, 0, 7, 9, 8, 7, 4, 3, 1]
-        n, lower_bound, upper_bound = 20, 0, 9
-        v_stat, p_val = prng.equidistrib_test(seq, n, lower_bound, upper_bound)
-        print('seq   = {}'.format(seq))
-        print('V     = {}'.format(v_stat))
-        print('p val = {}'.format(p_val))
-        print('CS 3430: S22: HW10: Problem 03: Unit Test 01: pass')
+    # def test_hw10_prob03_ut01(self):
+    #     print('\n***** CS3430: S22: HW10: Problem 03: Unit Test 01 ************')
+    #     seq = [1, 5, 7, 8, 5, 1, 3, 4, 3, 3, 2, 2, 0, 7, 9, 8, 7, 4, 3, 1]
+    #     n, lower_bound, upper_bound = 20, 0, 9
+    #     v_stat, p_val = prng.equidistrib_test(seq, n, lower_bound, upper_bound)
+    #     print('seq   = {}'.format(seq))
+    #     print('V     = {}'.format(v_stat))
+    #     print('p val = {}'.format(p_val))
+    #     print('CS 3430: S22: HW10: Problem 03: Unit Test 01: pass')
 
     '''        
     def test_hw10_prob03_ut02(self):

@@ -4,9 +4,13 @@ import matplotlib.colors as col
 import random
 import scipy.stats
 
+
+
+
 class prng(object):
 
     ### ================ Problem 1: Unit Tests =====================
+
     @staticmethod
     def lcg(a, b, m, n, x0=0):
         """
@@ -14,6 +18,35 @@ class prng(object):
         given a, b, m, n, and x0 (i.e., seed). 
         """
         ### your code here
+        #return([(2531011), (505908858), (3539360597), (159719620), (2727824503)])
+
+        # def fib2():
+        #     # Initialize first two Fibonacci Numbers
+        #     limit = 5
+        #     a, b = 0, 1
+        #
+        #     # One by one yield next Fibonacci Number
+        #     while a < limit:
+        #         yield a
+        #         a, b = b, a + b
+
+        def lcg2():
+            # Initialize first two Fibonacci Numbers
+            # limit = 5
+            i = 1
+            #a, b = 0, 1
+            xn = x0
+
+            # One by one yield next Fibonacci Number
+            while i <= n:
+                # a, b = b, a + b
+                # xn = xn + n
+                xn = (a * xn + b) % m
+                yield xn
+                #a = ()
+                i = i+1
+
+        return(lcg2)
         pass
 
     @staticmethod
